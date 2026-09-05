@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#10100f">
+	<title>InvestSIM | Simulador de investimentos</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="ambient ambient-one"></div>
+	<div class="ambient ambient-two"></div>
+	<header class="topbar">
+		<a class="brand" href="#top" aria-label="InvestSIM início"><span class="brand-mark">IS</span><span>invest<span>SIM</span></span></a>
+		<nav class="nav-links" aria-label="Navegação principal"><a href="#simulador">Simulador</a><a href="#como-funciona">Como funciona</a></nav>
+		<button class="ghost-button" id="themeToggle" type="button" aria-label="Alternar tema">◐ <span>Tema</span></button>
+	</header>
+
+	<main id="top">
+		<section class="hero" id="simulador">
+			<div class="eyebrow"><span></span> Planeje com clareza</div>
+			<h1>Seu dinheiro pode<br><em>trabalhar por você.</em></h1>
+			<p class="hero-copy">Simule cenários, entenda o poder dos juros e transforme seus objetivos em um plano possível.</p>
+			<div class="hero-stat"><strong id="heroStat">R$ 10.000</strong><span>é o resultado de um cenário bem planejado</span></div>
+		</section>
+
+		<section class="workspace" aria-label="Calculadora de investimentos">
+			<div class="panel controls-panel">
+				<div class="panel-heading"><div><p class="overline">Seu cenário</p><h2>Monte sua simulação</h2></div><span class="live-pill"><i></i> Ao vivo</span></div>
+				<div class="mode-switch" role="tablist" aria-label="Tipo de juros">
+					<button class="mode-button active" data-mode="compound" role="tab" aria-selected="true" type="button">Juros compostos <small>Recomendado</small></button>
+					<button class="mode-button" data-mode="simple" role="tab" aria-selected="false" type="button">Juros simples</button>
+				</div>
+				<div class="fields-grid">
+					<label class="field wide"><span>Valor inicial</span><div class="input-wrap"><b>R$</b><input id="initial" type="number" min="0" step="100" value="10000" inputmode="decimal"></div></label>
+					<label class="field"><span>Aporte mensal <small>(opcional)</small></span><div class="input-wrap"><b>R$</b><input id="monthly" type="number" min="0" step="50" value="500" inputmode="decimal"></div></label>
+					<label class="field"><span>Taxa de juros <small>(ao mês)</small></span><div class="input-wrap"><input id="rate" type="number" min="0" step="0.1" value="0.8" inputmode="decimal"><b>%</b></div></label>
+					<label class="field"><span>Período</span><div class="input-wrap"><input id="period" type="number" min="1" step="1" value="36" inputmode="numeric"><b>meses</b></div></label>
+				</div>
+				<div class="quick-presets"><span>Atalhos</span><button type="button" data-preset="conservative">Conservador</button><button type="button" data-preset="balanced">Equilibrado</button><button type="button" data-preset="ambitious">Ambicioso</button></div>
+				<div class="history-row" id="historyRow" hidden><span>Recentes</span><div id="historyList"></div><button class="clear-history" id="clearHistory" type="button">Limpar</button></div>
+				<div class="slider-row"><div><span>Horizonte de tempo</span><strong id="periodLabel">3 anos</strong></div><input id="periodSlider" type="range" min="1" max="240" value="36"><div class="slider-labels"><span>1 mês</span><span>20 anos</span></div></div>
+				<button class="primary-button" id="simulateButton" type="button">Simular agora <span>→</span></button>
+			</div>
+
+			<div class="panel result-panel">
+				<div class="result-top"><div><p class="overline">Projeção estimada</p><h2 id="resultTotal">R$ 37.484,89</h2></div><div class="result-icon">↗</div></div>
+				<div class="result-meta"><span>Montante final</span><strong id="resultGrowth">+R$ 9.484,89</strong></div>
+				<div class="chart-wrap"><canvas id="growthChart" aria-label="Gráfico de crescimento do investimento"></canvas><div class="chart-tooltip" id="chartTooltip">Mês 36 <b>R$ 37.484</b></div></div>
+				<div class="chart-legend"><span><i class="legend-line"></i> Patrimônio acumulado</span><span><i class="legend-dot"></i> Juros ganhos</span></div>
+				<div class="result-breakdown"><div><span>Capital investido</span><strong id="investedTotal">R$ 28.000,00</strong></div><div><span>Juros ganhos</span><strong class="gold-text" id="interestTotal">R$ 9.484,89</strong></div></div>
+				<div class="result-actions"><button id="copyButton" type="button">Copiar resultado</button><button id="shareButton" type="button">Compartilhar</button></div><p class="action-feedback" id="actionFeedback" role="status" aria-live="polite"></p>
+			</div>
+		</section>
+
+		<section class="insight-strip"><div class="insight-symbol">✦</div><div><p class="overline">Uma visão mais inteligente</p><h3>Consistência vence pressa.</h3></div><p>Com aportes regulares, você coloca o tempo ao seu lado e deixa os juros compostos fazerem o trabalho pesado.</p><div class="insight-number"><strong id="insightYears">3</strong><span>anos de<br>crescimento</span></div></section>
+
+		<section class="details" id="como-funciona"><div class="section-heading"><p class="overline">Mais detalhes</p><h2>O que seus números dizem</h2></div><div class="detail-grid"><article class="detail-card"><span class="card-icon">◒</span><div><h3>Total aportado</h3><p>Ao final do período, você terá investido <strong id="milestone">R$ 28.000</strong> com seus aportes.</p></div></article><article class="detail-card"><span class="card-icon gold-icon">∿</span><div><h3>Participação dos juros</h3><p>Os juros representam <strong id="interestPercent">25,3%</strong> do montante final projetado.</p></div></article><article class="detail-card"><span class="card-icon">⌁</span><div><h3>Rentabilidade anual</h3><p>A taxa mensal equivale a <strong id="annualRate">10,03%</strong> ao ano no efeito composto.</p></div></article></div></section>
+	</main>
+	<footer><span class="brand"><span class="brand-mark">IS</span><span>invest<span>SIM</span></span></span><span>Made by PM</span></footer>
+	<script src="script.js"></script>
+</body>
+</html>
